@@ -29,13 +29,13 @@ for i in {0..9}; do
   tunctl -t ${tapname} >/dev/null
  
   # main test
-  brctl addif    ${brname} ${tapname}
+  brctl addif ${brname} ${tapname}
   after_mac=$(showmac)
   if [[ "${before_mac}" != "${after_mac}" ]]; then
     printf " [addif] ${before_mac} -> ${after_mac}"
     changed=$((${changed} + 1))
   fi
-  brctl delif    ${brname} ${tapname}
+  brctl delif ${brname} ${tapname}
   after_mac=$(showmac)
   if [[ "${before_mac}" != "${after_mac}" ]]; then
     printf " [delif] ${before_mac} -> ${after_mac}"
