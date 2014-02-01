@@ -15,15 +15,15 @@ function showmac() {
   cat /sys/class/net/${brname}/address
 }
 
-total=0
+cur=0
 changed=0
+to=${1:-10}
 
-for i in {0..9}; do
-  total=$((${total} + 1))
+while [[ ${cur} -lt ${to} ]]; do
   tapname=${tapprefix}
   before_mac=$(showmac)
 
-  printf "... %02d %s" ${i} ${before_mac}
+  printf "... %02d %s" ${cur} ${before_mac}
  
   # setup
   tunctl -t ${tapname} >/dev/null
@@ -46,6 +46,7 @@ for i in {0..9}; do
   tunctl -d ${tapname} >/dev/null
 
   echo
+  cur=$((${cur} + 1))
 done
 
-echo total:${total} changed:${changed} percentage:$((100 * ${changed} / ${total}))%
+echo total:${cur} changed:${changed} percentage:$((100 * ${changed} / ${cur}))%
