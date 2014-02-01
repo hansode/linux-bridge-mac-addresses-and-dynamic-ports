@@ -19,4 +19,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     node.vm.hostname = "node02"
     node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
   end
+
+  # set static mac address to the linux bridge
+  config.vm.define "node03" do |node|
+    node.vm.hostname = "node03"
+    node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
+  end
 end
