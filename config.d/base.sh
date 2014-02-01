@@ -6,4 +6,4 @@
 set -e
 set -x
 
-brctl addbr brtap
+[[ -d /sys/class/net/brtap ]] || brctl addbr brtap
