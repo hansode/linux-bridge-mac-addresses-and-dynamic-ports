@@ -11,13 +11,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "node01" do |node|
     node.vm.hostname = "node01"
-    node.vm.provision "shell", path: "config.d/common.sh"
+    node.vm.provision "shell", path: "config.d/base.sh"
     node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
   end
 
   config.vm.define "node02" do |node|
     node.vm.hostname = "node02"
-    node.vm.provision "shell", path: "config.d/common.sh"
+    node.vm.provision "shell", path: "config.d/base.sh"
     node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh"
   end
 end
