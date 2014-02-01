@@ -16,9 +16,10 @@ function showmac() {
 }
  
 for i in {0..9}; do
-  echo "... ${i}"
   tapname=${tapprefix}${i}
   before_mac=$(showmac)
+
+  echo "... ${i} ${before_mac}"
  
   # setup
   tunctl -t ${tapname} >/dev/null
