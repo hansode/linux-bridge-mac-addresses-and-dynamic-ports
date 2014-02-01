@@ -26,6 +26,17 @@ via http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-p
 | node05 | brtap / fixed  | eth1 / fe:ff:ff:ff:ff:ff |
 | node06 | brtap / fixed  | eth1 / 80:00:00:00:00:00 |
 
+## Test Result
+
+| node   | total  | changed |     % |
+|:-------|:-------|--------:|------:|
+| node01 |  1,000 |  1,001  |  100% |
+| node02 |  1,000 |    376  |   37% |
+| node03 |  1,000 |      0  |    0% |
+| node04 |  1,000 |      0  |    0% |
+| node05 |  1,000 |  1,000  |  100% |
+| node06 |  1,000 |    476  |   47% |
+
 ## Usage
 
 ```
