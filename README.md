@@ -17,12 +17,14 @@ via http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-p
 
 ## Guest Specification
 
-+ node01
-  + a simple linux bridge
-+ node02
-  + a simple linux bridge with a tap device
-+ node03
-  + a simple linux bridge fixed MAC address with a tap device
+| node   | linux-bridge   | tap device (dummy nic)   |
+|:-------|:---------------|:-------------------------|
+| node01 | brtap / random | none                     |
+| node02 | brtap / random | eth1 / random            |
+| node03 | brtap / fixed  | eth1 / random            |
+| node04 | brtap / fixed  | eth1 / 00:00:00:00:00:01 |
+| node05 | brtap / fixed  | eth1 / fe:ff:ff:ff:ff:ff |
+| node06 | brtap / fixed  | eth1 / 80:00:00:00:00:00 |
 
 ## Usage
 
@@ -30,20 +32,8 @@ via http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-p
 $ vagrant up
 ```
 
-### for node01
+### Run testing script
 
 ```
-$ vagrant ssh node01 -c "sudo /vagrant/vif-adddel.sh"
-```
-
-### for node02
-
-```
-$ vagrant ssh node02 -c "sudo /vagrant/vif-adddel.sh"
-```
-
-### for node03
-
-```
-$ vagrant ssh node03 -c "sudo /vagrant/vif-adddel.sh"
+$ vagrant ssh <node> -c "sudo /vagrant/vif-adddel.sh"
 ```
