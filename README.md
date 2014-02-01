@@ -21,6 +21,8 @@ via http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-p
   + a simple linux bridge
 + node02
   + a simple linux bridge with a tap device
++ node03
+  + a simple linux bridge fixed MAC address with a tap device
 
 ## Usage
 
@@ -38,4 +40,10 @@ $ vagrant ssh node01 -c "sudo /vagrant/vif-adddel.sh"
 
 ```
 $ vagrant ssh node02 -c "sudo /vagrant/vif-adddel.sh"
+```
+
+### for node03
+
+```
+$ vagrant ssh node03 -c "sudo /vagrant/vif-adddel.sh"
 ```
