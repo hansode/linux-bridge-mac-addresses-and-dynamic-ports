@@ -17,14 +17,14 @@ via http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-p
 
 ## Guest Specification
 
-| node   | linux-bridge   | tap device (dummy nic)   |
-|:-------|:---------------|:-------------------------|
-| node01 | brtap / random | none                     |
-| node02 | brtap / random | eth1 / random            |
-| node03 | brtap / fixed  | eth1 / random            |
-| node04 | brtap / fixed  | eth1 / 00:00:00:00:00:01 |
-| node05 | brtap / fixed  | eth1 / fe:ff:ff:ff:ff:ff |
-| node06 | brtap / fixed  | eth1 / 80:00:00:00:00:00 |
+| node   | linux-bridge    | tap device (dummy nic)   |
+|:-------|:----------------|:-------------------------|
+| node01 | brtap / unfixed | none                     |
+| node02 | brtap / unfixed | eth1 / random            |
+| node03 | brtap / fixed   | eth1 / random            |
+| node04 | brtap / fixed   | eth1 / 00:00:00:00:00:01 |
+| node05 | brtap / fixed   | eth1 / fe:ff:ff:ff:ff:ff |
+| node06 | brtap / fixed   | eth1 / 80:00:00:00:00:00 |
 
 ## Test Result
 
