@@ -21,10 +21,10 @@ via http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-p
 |:-------|:--------------------|:---------------------------|
 | node01 | `brtap` unfixed MAC | none                       |
 | node02 | `brtap` unfixed MAC | `eth1` random              |
-| node03 | `brtap` fixed MAC   | `eth1` random              |
-| node04 | `brtap` fixed MAC   | `eth1` `00:00:00:00:00:01` |
-| node05 | `brtap` fixed MAC   | `eth1` `fe:ff:ff:ff:ff:ff` |
-| node06 | `brtap` fixed MAC   | `eth1` `80:00:00:00:00:00` |
+| node03 | `brtap`   fixed MAC | `eth1` random              |
+| node04 | `brtap` unfixed MAC | `eth1` `00:00:00:00:00:01` |
+| node05 | `brtap` unfixed MAC | `eth1` `fe:ff:ff:ff:ff:ff` |
+| node06 | `brtap` unfixed MAC | `eth1` `80:00:00:00:00:00` |
 
 ## Test Result
 
