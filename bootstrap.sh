@@ -14,6 +14,6 @@ addpkgs="
  bridge-utils tunctl
 "
 
-if [[ -n "${addpkgs}" ]]; then
+if [[ -n "$(echo ${addpkgs})" ]]; then
   yum install -y ${addpkgs}
 fi
