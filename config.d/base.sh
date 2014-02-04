@@ -6,4 +6,8 @@
 set -e
 set -x
 
-[[ -d /sys/class/net/brtap ]] || brctl addbr brtap
+brname=brtap
+ethname=eth1
+
+[[ -d /sys/class/net/${brname} ]] || brctl addbr ${brname}
+cat   /sys/class/net/${brname}/address
