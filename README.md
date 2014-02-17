@@ -22,6 +22,41 @@ via [Set a stable & high MAC addr for guest TAP devices on host](https://www.red
 + [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 + Vagrant Base Box for CentOS-6
 
+## Minimal Testing Scenario
+
+1: Setup linux bridge
+
+```
+$ sudo brctl addbr brtap
+$ cat /sys/class/net/brtap/address
+```
+
+2: Setup tap interface
+
+```
+$ sudo tunctl -t         tapxxx
+```
+
+3: Compare current MAC address and previous MAC address
+
+```
+$ sudo brctl addif brtap tapxxx
+$ cat /sys/class/net/brtap/address
+```
+
+4: Compare current MAC address and previous MAC address
+
+```
+$ sudo brctl delif brtap tapxxx
+$ cat /sys/class/net/brtap/address
+```
+
+5: Tear down tap interface
+
+```
+$ sudo tunctl -d         tapxxx
+```
+
 ## Guest Specification
 
 | node   | linux bridge        | base eth1                  | added/removed nic |
