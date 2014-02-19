@@ -69,7 +69,7 @@ $ sudo tunctl -d         tapxxx
 
 ## Guest Specification
 
-| node   | linux bridge        | base eth1                  | added/removed nic |
+| node   | linux bridge        | real slave interface       | slave interface   |
 |:-------|:--------------------|:---------------------------|:------------------|
 | node01 | `brtap` unfixed MAC | none                       | `tapxxx` random   |
 | node02 | `brtap` unfixed MAC | `eth1` random              | `tapxxx` random   |
