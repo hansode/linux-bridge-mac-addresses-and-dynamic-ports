@@ -16,6 +16,10 @@ via [Set a stable & high MAC addr for guest TAP devices on host](https://www.red
 > The kernel gives TAP devices a completely random MAC address.
 > Occassionally the random TAP device MAC is lower than that of the physical interface (eth0, eth1etc) that is enslaved, causing the bridge to change its MAC.
 
+# References
+
++ [Understanding Linux Network Internals](http://it-ebooks.info/book/2195/)
+
 # Issue: bridge's unstable MAC address & TAP's low MAC address
 
 ```
