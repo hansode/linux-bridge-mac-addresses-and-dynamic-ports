@@ -16,9 +16,36 @@ via [Set a stable & high MAC addr for guest TAP devices on host](https://www.red
 > The kernel gives TAP devices a completely random MAC address.
 > Occassionally the random TAP device MAC is lower than that of the physical interface (eth0, eth1etc) that is enslaved, causing the bridge to change its MAC.
 
-# References
+via [Understanding Linux Network Internals](http://it-ebooks.info/book/2195/)
 
-+ [Understanding Linux Network Internals](http://it-ebooks.info/book/2195/)
+[net/bridge/br_stp_if.c br_stp_recalculate_bridge_id](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_stp_if.c#L209-L230):
+
+> Bridge MAC address:
+>
+> The lowest MAC address among the ones configured on the enslaved devices is selected.
+> The selection is done with br_stp_recalculate_bridge_id anytime a new bridge port is created or deleted, and when an enslaved device changes its MAC address.
+
+[net/bridge/br_ioctl.c br_dev_ioctl](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_ioctl.c#L400-L416):
+
+> The bridge MAC address dev_addr is cleared because it will be derived by the MAC addresses configured on its enslaved devices with br_stp_recalculate_bridge_id.
+> For the same reason, the drive does not provide a set_mac_addr function.
+
+via [linux-2.6.32 source code](https://github.com/torvalds/linux/tree/v2.6.32)
+
+[net/bridge/br_stp_if.c#L217-L219](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_stp_if.c#L217-L219):
+
+```
+ 	/* user has chosen a value so keep it */
+	if (br->flags & BR_SET_MAC_ADDR)
+		return;
+```
+
+[net/bridge/br_private.h#L101-L102](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_private.h#L101-L102):
+
+```
+	unsigned long			flags;
+#define BR_SET_MAC_ADDR		0x00000001
+```
 
 # Issue: bridge's unstable MAC address & TAP's low MAC address
 
