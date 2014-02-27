@@ -88,6 +88,18 @@ void br_dev_setup(struct net_device *dev)
 }
 ```
 
+via [Linux Bridges, care and feeding.](http://blog.tinola.com/?e=4)
+
+> Fixes;
+>
+> None of these are really appealing.
+>
+> 1. We could go back to using a VETH device for the host, and using the bond MAC address, and stop putting an IP address on the bridge. We then would need to assign a random MAC to the bond itself (which now seems to work).
+> 2. We can create a dummy interface and give it a low numbered MAC address (e.g. starting 00:00) and then connect that to the bridge.
+> 3. We can set the MAC address of the primary interface to start 00: so it always is the lowest numbered MAC address. 
+>
+> We're trying 3 as its the least disruptive. 1 is probably the "proper" way to do it however.
+
 ## Appendix
 
 ### brctl addif/delif :bridge :device
