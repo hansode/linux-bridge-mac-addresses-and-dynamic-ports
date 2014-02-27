@@ -18,12 +18,12 @@ via [Set a stable & high MAC addr for guest TAP devices on host](https://www.red
 
 via [Understanding Linux Network Internals](http://it-ebooks.info/book/2195/)
 
-[net/bridge/br_stp_if.c br_stp_recalculate_bridge_id](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_stp_if.c#L209-L230):
-
 > Bridge MAC address:
 >
 > The lowest MAC address among the ones configured on the enslaved devices is selected.
 > The selection is done with br_stp_recalculate_bridge_id anytime a new bridge port is created or deleted, and when an enslaved device changes its MAC address.
+
+[net/bridge/br_stp_if.c#L209-L230](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_stp_if.c#L209-L230):
 
 ```
 /* called under bridge lock */
@@ -50,6 +50,21 @@ void br_stp_recalculate_bridge_id(struct net_bridge *br)
 }
 ```
 
+[net/bridge/br_stp_if.c#L217-L219](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_stp_if.c#L217-L219):
+
+```
+ 	/* user has chosen a value so keep it */
+	if (br->flags & BR_SET_MAC_ADDR)
+		return;
+```
+
+[net/bridge/br_private.h#L101-L102](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_private.h#L101-L102):
+
+```
+	unsigned long			flags;
+#define BR_SET_MAC_ADDR		0x00000001
+```
+
 > The bridge MAC address dev_addr is cleared because it will be derived by the MAC addresses configured on its enslaved devices with br_stp_recalculate_bridge_id.
 > For the same reason, the drive does not provide a set_mac_addr function.
 
@@ -73,7 +88,11 @@ void br_dev_setup(struct net_device *dev)
 }
 ```
 
-[net/bridge/br_ioctl.c br_dev_ioctl](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_ioctl.c#L400-L416):
+## Appendix
+
+### brctl addif/delif :bridge :device
+
+[net/bridge/br_ioctl.c#L400-L416](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_ioctl.c#L400-L416):
 
 ```
 int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
@@ -95,22 +114,7 @@ int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 }
 ```
 
-via [linux-2.6.32 source code](https://github.com/torvalds/linux/tree/v2.6.32)
-
-[net/bridge/br_stp_if.c#L217-L219](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_stp_if.c#L217-L219):
-
-```
- 	/* user has chosen a value so keep it */
-	if (br->flags & BR_SET_MAC_ADDR)
-		return;
-```
-
-[net/bridge/br_private.h#L101-L102](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_private.h#L101-L102):
-
-```
-	unsigned long			flags;
-#define BR_SET_MAC_ADDR		0x00000001
-```
+### ip link set :br-if address macaddr
 
 [net/bridge/br_device.c#L85-L101](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_device.c#L85-L101):
 
