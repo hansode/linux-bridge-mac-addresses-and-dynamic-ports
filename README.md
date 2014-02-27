@@ -68,7 +68,7 @@ void br_stp_recalculate_bridge_id(struct net_bridge *br)
 > The bridge MAC address dev_addr is cleared because it will be derived by the MAC addresses configured on its enslaved devices with br_stp_recalculate_bridge_id.
 > For the same reason, the drive does not provide a set_mac_addr function.
 
-[net/bridge/br_device.c br_dev_setup](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_device.c#L173-L187):
+[net/bridge/br_device.c#L173-L187](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_device.c#L173-L187):
 
 ```
 void br_dev_setup(struct net_device *dev)
