@@ -150,6 +150,13 @@ static int br_set_mac_address(struct net_device *dev, void *p)
 }
 ```
 
+# References
+
+1. http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-ports/
+2. https://www.redhat.com/archives/libvir-list/2010-July/msg00450.html
+3. http://it-ebooks.info/book/2195/
+4. http://blog.tinola.com/?e=4
+
 # Issue: bridge's unstable MAC address & TAP's low MAC address
 
 ```
