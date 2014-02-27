@@ -16,6 +16,18 @@ via [Set a stable & high MAC addr for guest TAP devices on host](https://www.red
 > The kernel gives TAP devices a completely random MAC address.
 > Occassionally the random TAP device MAC is lower than that of the physical interface (eth0, eth1etc) that is enslaved, causing the bridge to change its MAC.
 
+via [Linux Bridges, care and feeding.](http://blog.tinola.com/?e=4)
+
+> Fixes;
+>
+> None of these are really appealing.
+>
+> 1. We could go back to using a VETH device for the host, and using the bond MAC address, and stop putting an IP address on the bridge. We then would need to assign a random MAC to the bond itself (which now seems to work).
+> 2. We can create a dummy interface and give it a low numbered MAC address (e.g. starting 00:00) and then connect that to the bridge.
+> 3. We can set the MAC address of the primary interface to start 00: so it always is the lowest numbered MAC address. 
+>
+> We're trying 3 as its the least disruptive. 1 is probably the "proper" way to do it however.
+
 via [Understanding Linux Network Internals](http://it-ebooks.info/book/2195/)
 
 > Bridge MAC address:
@@ -68,7 +80,7 @@ void br_stp_recalculate_bridge_id(struct net_bridge *br)
 > The bridge MAC address dev_addr is cleared because it will be derived by the MAC addresses configured on its enslaved devices with br_stp_recalculate_bridge_id.
 > For the same reason, the drive does not provide a set_mac_addr function.
 
-[net/bridge/br_device.c br_dev_setup](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_device.c#L173-L187):
+[net/bridge/br_device.c#L173-L187](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_device.c#L173-L187):
 
 ```
 void br_dev_setup(struct net_device *dev)
@@ -137,6 +149,13 @@ static int br_set_mac_address(struct net_device *dev, void *p)
 	return 0;
 }
 ```
+
+# References
+
+1. http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-ports/
+2. https://www.redhat.com/archives/libvir-list/2010-July/msg00450.html
+3. http://blog.tinola.com/?e=4
+4. http://it-ebooks.info/book/2195/
 
 # Issue: bridge's unstable MAC address & TAP's low MAC address
 
