@@ -65,8 +65,6 @@ function install_ifcfg_bridge_map() {
   local ifname=${1:-br0}
   shift; eval local "${@}"
 
-  render_ifcfg_bridge ${ifname} "${@}" | install_ifcfg_file ${ifname}
-
   local slave_ifcfg_path=$(gen_ifcfg_path ${slave})
   if [[ ! -f ${slave_ifcfg_path} ]]; then
     return 0
