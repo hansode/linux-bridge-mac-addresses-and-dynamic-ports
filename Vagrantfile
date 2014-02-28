@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # + set static mac address to the linux bridge
   # + set static mac address to the tap 80:00:00:00:00:00
 
-  (1..6).map { |id|
+  (1..6).each { |id|
     name = sprintf("node%02d", id)
 
     config.vm.define "#{name}" do |node|
