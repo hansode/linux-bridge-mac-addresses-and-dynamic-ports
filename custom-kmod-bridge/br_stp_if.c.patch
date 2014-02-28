@@ -1,0 +1,11 @@
+--- br_stp_if.c.orig	2014-02-28 19:19:36.996832200 +0900
++++ br_stp_if.c	2014-02-28 19:19:36.995852600 +0900
+@@ -216,6 +216,8 @@
+ 	struct net_bridge_port *p;
+ 
+ 	/* user has chosen a value so keep it */
++	printk(KERN_INFO "%s: if (br->flags & BR_SET_MAC_ADDR) # br->flags (%ld) & BR_SET_MAC_ADDR (%d) \n",
++		br->dev->name, br->flags, BR_SET_MAC_ADDR);
+ 	if (br->flags & BR_SET_MAC_ADDR)
+ 		return;
+ 
