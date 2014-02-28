@@ -22,9 +22,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # + set static mac address to the linux bridge
   # + set static mac address to the tap 80:00:00:00:00:00
 
-  nodes = (1..6).map { |id| name = sprintf("node%02d", id) }
+  (1..6).map { |id|
+    name = sprintf("node%02d", id)
 
-  nodes.each { |name|
     config.vm.define "#{name}" do |node|
       node.vm.hostname = "#{name}"
       node.vm.provision "shell", path: "config.d/#{node.vm.hostname}.sh" # Configuration: node-specific (phase:2.5)
