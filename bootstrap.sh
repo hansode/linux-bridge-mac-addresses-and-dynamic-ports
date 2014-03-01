@@ -12,6 +12,7 @@ function yum() {
 
 addpkgs="
  bridge-utils tunctl
+ gdb crash
 "
 
 if [[ -n "$(echo ${addpkgs})" ]]; then
