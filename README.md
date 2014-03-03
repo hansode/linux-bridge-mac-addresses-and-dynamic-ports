@@ -102,7 +102,7 @@ void br_dev_setup(struct net_device *dev)
 
 ## Appendix
 
-### brctl addif/delif :bridge :device
+### `brctl addif/delif :bridge :device`
 
 [net/bridge/br_ioctl.c#L400-L416](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_ioctl.c#L400-L416):
 
@@ -126,7 +126,7 @@ int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 }
 ```
 
-### ip link set :br-if address macaddr
+### `ip link set :br-if address :macaddr`
 
 [net/bridge/br_device.c#L85-L101](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_device.c#L85-L101):
 
