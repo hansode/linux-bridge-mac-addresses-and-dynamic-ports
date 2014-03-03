@@ -1,5 +1,15 @@
 # Linux bridge: MAC addresses and dynamic ports
 
+## Issue: bridge-if's unstable MAC address & slaved-if's low numberd MAC address
+
+```
+                <-----------+
+                  lower     |
+                      area  |
+00:00:00:00:00 .-----o------o----. ff:ff:ff:ff:ff:ff
+                 slave-if bridge-if(unstable MAC address)
+```
+
 via [Linux bridge: MAC addresses and dynamic ports](http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-ports/)
 
 > Scenario: KVM virtualization host running several bridged guests. The host has a bridge interface br0 that starts out containing only eth0, and other interfaces are dynamically added and removed from the bridge as guests are started and stopped.
@@ -102,7 +112,7 @@ void br_dev_setup(struct net_device *dev)
 
 ## Appendix
 
-### brctl addif/delif :bridge :device
+### `brctl addif/delif :bridge :device`
 
 [net/bridge/br_ioctl.c#L400-L416](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_ioctl.c#L400-L416):
 
@@ -126,7 +136,7 @@ int br_dev_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
 }
 ```
 
-### ip link set :br-if address macaddr
+### `ip link set :br-if address :macaddr`
 
 [net/bridge/br_device.c#L85-L101](https://github.com/torvalds/linux/blob/v2.6.32/net/bridge/br_device.c#L85-L101):
 
@@ -150,22 +160,7 @@ static int br_set_mac_address(struct net_device *dev, void *p)
 }
 ```
 
-# References
-
-1. http://backreference.org/2010/07/28/linux-bridge-mac-addresses-and-dynamic-ports/
-2. https://www.redhat.com/archives/libvir-list/2010-July/msg00450.html
-3. http://blog.tinola.com/?e=4
-4. http://it-ebooks.info/book/2195/
-
-# Issue: bridge's unstable MAC address & TAP's low MAC address
-
-```
-                <-----------+
-                  lower     |
-                      area  |
-00:00:00:00:00 .-----o------o----. ff:ff:ff:ff:ff:ff
-                 tapxxx   brtap(unstable)
-```
+# Test Verification Box
 
 ## System Requirements
 

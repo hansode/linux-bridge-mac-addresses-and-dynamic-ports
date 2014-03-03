@@ -13,13 +13,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # node03
   # + set static mac address to the linux bridge
   # node04
-  # + set static mac address to the linux bridge
   # + set static mac address to the tap 00:00:00:00:00:01
   # node05
-  # + set static mac address to the linux bridge
   # + set static mac address to the tap fe:ff:ff:ff:ff:ff
   # node06
-  # + set static mac address to the linux bridge
   # + set static mac address to the tap 80:00:00:00:00:00
 
   (1..6).each { |id|
