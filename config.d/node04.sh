@@ -84,6 +84,6 @@ ethname=eth1
 install_ifcfg_tap                  ${ethname} address=00:00:00:00:00:01
 /etc/init.d/network restart
 
-install_ifcfg_bridge     ${brname}            address=$(cat /sys/class/net/${ethname}/address)
+install_ifcfg_bridge     ${brname}            address=
 install_ifcfg_bridge_map ${brname} slave=${ethname}
 /etc/init.d/network restart
