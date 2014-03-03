@@ -157,14 +157,14 @@ static int br_set_mac_address(struct net_device *dev, void *p)
 3. http://blog.tinola.com/?e=4
 4. http://it-ebooks.info/book/2195/
 
-# Issue: bridge's unstable MAC address & TAP's low MAC address
+# Issue: bridge-if's unstable MAC address & slaved-if's low numberd MAC address
 
 ```
                 <-----------+
                   lower     |
                       area  |
 00:00:00:00:00 .-----o------o----. ff:ff:ff:ff:ff:ff
-                 tapxxx   brtap(unstable)
+                 slave-if bridge-if(unstable)
 ```
 
 ## System Requirements
