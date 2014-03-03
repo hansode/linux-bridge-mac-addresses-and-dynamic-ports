@@ -168,7 +168,7 @@ static int br_set_mac_address(struct net_device *dev, void *p)
 + [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 + Vagrant Base Box for CentOS-6
 
-## Minimal Testing Scenario
+## Minimal Scenario Testing
 
 1: Setup linux bridge
 
@@ -214,7 +214,7 @@ $ sudo tunctl -d         tapxxx
 | node05 | `brtap` unfixed MAC | `eth1` `fe:ff:ff:ff:ff:ff` | `tapxxx` random   |
 | node06 | `brtap` unfixed MAC | `eth1` `80:00:00:00:00:00` | `tapxxx` random   |
 
-## Test Result
+## Verification Results
 
 | node   | total  | changed |     % |
 |:-------|:-------|--------:|------:|
