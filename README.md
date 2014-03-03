@@ -203,6 +203,13 @@ $ cat /sys/class/net/brtap/address
 $ sudo tunctl -d         tapxxx
 ```
 
+6: Tear down bridge interface
+
+```
+$ sudo brctl delbr brtap
+```
+
+
 ## Guest Specification
 
 | node   | linux bridge        | real slave interface       | slave interface   |
