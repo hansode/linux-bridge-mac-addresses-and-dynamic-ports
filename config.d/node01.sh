@@ -62,7 +62,7 @@ function install_ifcfg_tap() {
   render_ifcfg_tap ${ifname} "${@}" | install_ifcfg_file ${ifname}
 }
 
-function install_ifcfg_bridge_map() {
+function configure_ifcfg_bridge_map() {
   local ifname=${1:-br0}
   shift; eval local "${@}"
 
@@ -86,5 +86,5 @@ ethname=eth1
 #/etc/init.d/network restart
 
 install_ifcfg_bridge     ${brname}            address=
-#install_ifcfg_bridge_map ${brname} slave=${ethname}
+#configure_ifcfg_bridge_map ${brname} slave=${ethname}
 /etc/init.d/network restart
