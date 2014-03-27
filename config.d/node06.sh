@@ -29,7 +29,7 @@ function render_ifcfg_bridge() {
   cat <<-EOS
 	DEVICE=${ifname}
 	TYPE=Bridge
-	$([[ -z "${address}" ]] || echo "MACADDR=${address}")
+	$([[ -z "${mac}" ]] || echo "MACADDR=${address}")
 	BOOTPROTO=none
 	ONBOOT=yes
 	EOS
@@ -42,7 +42,7 @@ function render_ifcfg_tap() {
   cat <<-EOS
 	DEVICE=${ifname}
 	TYPE=Tap
-	$([[ -z "${address}" ]] || echo "MACADDR=${address}")
+	$([[ -z "${mac}" ]] || echo "MACADDR=${address}")
 	BOOTPROTO=none
 	ONBOOT=yes
 	EOS
@@ -82,9 +82,9 @@ function configure_ifcfg_bridge_map() {
 brname=brtap
 ethname=eth1
 
-install_ifcfg_tap                  ${ethname} address=80:00:00:00:00:00
+install_ifcfg_tap                  ${ethname} mac=80:00:00:00:00:00
 /etc/init.d/network restart
 
-install_ifcfg_bridge     ${brname}            address=
+install_ifcfg_bridge     ${brname}            mac=
 configure_ifcfg_bridge_map ${brname} slave=${ethname}
 /etc/init.d/network restart
