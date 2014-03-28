@@ -29,7 +29,7 @@ function render_ifcfg_bridge() {
   cat <<-EOS
 	DEVICE=${ifname}
 	TYPE=Bridge
-	$([[ -z "${mac}" ]] || echo "MACADDR=${address}")
+	$([[ -z "${mac}" ]] || echo "MACADDR=${mac}")
 	BOOTPROTO=none
 	ONBOOT=yes
 	EOS
@@ -42,7 +42,7 @@ function render_ifcfg_tap() {
   cat <<-EOS
 	DEVICE=${ifname}
 	TYPE=Tap
-	$([[ -z "${mac}" ]] || echo "MACADDR=${address}")
+	$([[ -z "${mac}" ]] || echo "MACADDR=${mac}")
 	BOOTPROTO=none
 	ONBOOT=yes
 	EOS
