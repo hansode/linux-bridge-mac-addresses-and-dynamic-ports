@@ -70,7 +70,7 @@ function config_line_in_file() {
 }
 
 function render_ifcfg_network_configuration() {
-  unset onboot device type ip mask net bcast gw mac dns1 dns2
+  unset onboot device type ip mask net bcast gw mac dns1 dns2 bridge
   # don't use "shift" here
   [[ ${#} == 0 ]] || eval local "${@}"
 
@@ -88,6 +88,7 @@ function render_ifcfg_network_configuration() {
 	$([[ -z "${mac}"    ]] || echo "MACADDR=${mac}")
 	$([[ -z "${dns1}"   ]] || echo "DNS1=${dns1}")
 	$([[ -z "${dns2}"   ]] || echo "DNS2=${dns2}")
+	$([[ -z "${bridge}" ]] || echo "BRIDGE=${bridge}")
 	EOS
 
   case ${bootproto} in
@@ -114,7 +115,7 @@ function render_ifcfg_network_configuration() {
 
 function render_ifcfg_ethernet() {
   local device=${1:-eth0}
-  unset onboot ip mask net bcast gw hw dns1 dns2
+  unset onboot ip mask net bcast gw hw dns1 dns2 bridge
   shift; [[ ${#} == 0 ]] || eval local "${@}"
 
   render_ifcfg_network_configuration "${@}" \
@@ -129,12 +130,12 @@ function render_ifcfg_ethernet() {
 
 function install_ifcfg_ethernet() {
   local device=${1:-eth0}
-  unset onboot ip mask net bcast gw hw dns1 dns2
+  unset onboot ip mask net bcast gw hw dns1 dns2 bridge
   shift; [[ ${#} == 0 ]] || eval local "${@}"
 
   render_ifcfg_ethernet ${device} \
    ip=${ip} mask=${mask} net=${net} bcast=${bcast} gw=${gw} \
-   hw=${hw} dns1=${dns1} dns2=${dns2} \
+   hw=${hw} dns1=${dns1} dns2=${dns2} bridge=${bridge} \
    | install_ifcfg_file ${device}
 }
 
@@ -290,7 +291,7 @@ function configure_vlan_conf() {
 
 function render_ifcfg_vlan() {
   local device=${1:-vlan1000}
-  unset onboot dns1 dns2
+  unset onboot dns1 dns2 bridge
   shift; [[ ${#} == 0 ]] || eval local "${@}"
 
   render_ifcfg_network_configuration "${@}" \
@@ -301,11 +302,11 @@ function render_ifcfg_vlan() {
 
 function install_ifcfg_vlan() {
   local device=${1:-vlan1000}
-  unset onboot dns1 dns2
+  unset onboot dns1 dns2 bridge
   shift; [[ ${#} == 0 ]] || eval local "${@}"
 
   render_ifcfg_vlan ${device} \
-   dns1=${dns1} dns2=${dns2} \
+   dns1=${dns1} dns2=${dns2} bridge=${bridge} \
    | install_ifcfg_file ${device}
 }
 
@@ -332,7 +333,7 @@ function map_ifcfg_vlan() {
 
 function render_ifcfg_tap() {
   local device=${1:-tap0}
-  unset onboot dns1 dns2
+  unset onboot dns1 dns2 bridge
   shift; [[ ${#} == 0 ]] || eval local "${@}"
 
   render_ifcfg_network_configuration "${@}" \
@@ -343,11 +344,11 @@ function render_ifcfg_tap() {
 
 function install_ifcfg_tap() {
   local device=${1:-tap0}
-  unset onboot mac dns1 dns2
+  unset onboot mac dns1 dns2 bridge
   shift; [[ ${#} == 0 ]] || eval local "${@}"
 
   render_ifcfg_tap ${device} \
-   mac=${mac} dns1=${dns1} dns2=${dns2} \
+   mac=${mac} dns1=${dns1} dns2=${dns2} bridge=${bridge} \
    | install_ifcfg_file ${device}
 }
 
